@@ -9,15 +9,13 @@ import 'semantic-ui-css/semantic.css'
 
 // Public components
 import TopHeader from '../../ui/components/TopHeader.jsx';
-import Home from '../../ui/pages/Home.jsx';
-import AllSites from '../../ui/pages/AllSites.jsx';
-import Settings from '../../ui/pages/Settings.jsx';
-import Account from '../../ui/pages/Account.jsx';
 import NotFound from '../../ui/pages/NotFound.jsx';
 import Signin from '../../ui/pages/Signin.jsx';
 import Signup from '../../ui/pages/Signup.jsx';
 import Signout from '../../ui/pages/Signout.jsx';
-import SitesAdmin from '../../ui/pages/SitesAdmin';
+import DashboardUser from '../../ui/pages/DashboardUser';
+import DashboardPrices from '../../ui/pages/DashboardPrices';
+import DashboardProducts from '../../ui/pages/DashboardProducts';
 
 Meteor.startup(() => {
   render(
@@ -25,14 +23,13 @@ Meteor.startup(() => {
       <div>
         <TopHeader />
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Signin} />
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
-          <ProtectedRoute path="/sites-admin" component={SitesAdmin} />
-          <ProtectedRoute path="/sites" component={AllSites} />
-          <ProtectedRoute path="/account" component={Account} />
-          <ProtectedRoute path="/settings" component={Settings} />
-          <ProtectedRoute path="/signout" component={Signout} />
+          <Route path="/signout" component={Signout} />
+          <Route path="/dashboardUser" component={DashboardUser} />
+          <Route path="/dashboardPrices" component={DashboardPrices} />
+          <Route path="/dashboardProducts" component={DashboardProducts} />
           <Route component={NotFound} />
         </Switch>
       </div>

@@ -15,10 +15,6 @@ const ErrorMessage = styled(Message)`
   width: 100% !important;
 `;
 
-const options=[
-  { key: 'c', text: 'Client', value: 'client' },
-  { key: 'o', text: 'Owner', value: 'owner' }
-]
 class Signup extends React.Component {
   constructor(props) {
     super(props)
@@ -34,15 +30,12 @@ class Signup extends React.Component {
   }
 
   handleSubmit() {
-    const { email, password, role } = this.state;
-    Accounts.createUser({ email, username: email, password, roles: [role] }, (err) => {
+    const { email, password } = this.state;
+    Accounts.createUser({ email, username: email, password }, (err) => {
       if (err) {
         this.setState({ error: err.reason })
       } else {
-        // browserHistory.push('/');
         this.setState({ redirectToReferer: true })
-        console.log(this.props.currentUser)
-        console.log(this.state.redirectToReferer)
       }
     });
   }
@@ -50,17 +43,17 @@ class Signup extends React.Component {
   render() {
     const { error, redirectToReferer } = this.state
     if (redirectToReferer) {
-      return <Redirect to='/' />
+      return <Redirect to='/dashboardUser' />
     }
     return (
       <Container>
         <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
-          <Grid.Column>
-            <Header as="h2" textAlign="center">
-              <Image src="/logo.png" alt="logo" /> Register your account
-            </Header>
-            <Form onSubmit={this.handleSubmit}>
+          <Grid.Column>            
+            <Form onSubmit={this.handleSubmit}>              
               <Segment stacked padded='very'>
+                <Header as="h2" textAlign="center">
+                  <Image src="/logo.gif" alt="logo" /> Register
+                </Header>
                 <Form.Input
                   label="Email"
                   icon="user"
@@ -80,14 +73,6 @@ class Signup extends React.Component {
                   type="password"
                   onChange={this.handleChange}
                   required
-                />
-                <Form.Select
-                  label="Type"
-                  options={options}
-                  placeholder="Client"
-                  required
-                  name="role"
-                  onChange={this.handleChange}
                 />
                 <Form.Button content="Submit" />
               </Segment>

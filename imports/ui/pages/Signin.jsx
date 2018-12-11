@@ -45,7 +45,7 @@ class Signin extends React.Component {
     })
     const { redirectToReferer } = this.state
     if (redirectToReferer) {
-      return <Redirect to='/' />
+      return <Redirect to='/dashboardUser' />
     }
   }
 
@@ -55,18 +55,18 @@ class Signin extends React.Component {
     const { redirectToReferer, error } = this.state
     const { from } = location.state || { from: { pathname: '/' } }
     // if correct authentication, redirect to page instead of login screen
-    if (redirectToReferer) {
-      return <Redirect to='/' />
+    if (this.props.currentUser || redirectToReferer) {
+      return <Redirect to='/dashboardUser' />
     }
 
     return (
       <Container>
         <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
-          <Grid.Column>
-            <Header as="h2" textAlign="center">
-              <Image src="/logo.png" alt="logo" /> Log-in to your account
-            </Header>
+          <Grid.Column>           
             <Segment stacked padded='very'>
+              <Header as="h2" textAlign="center">
+                <Image src="/logo.gif" alt="logo" /> Login
+              </Header>
               <Form onSubmit={this.handleSubmit}>
                 <Form.Input
                   label="Email"
